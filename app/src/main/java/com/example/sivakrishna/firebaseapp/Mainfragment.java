@@ -1,8 +1,14 @@
 package com.example.sivakrishna.firebaseapp;
 
+
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,7 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class List extends AppCompatActivity {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Mainfragment extends Fragment {
     private DatabaseReference mDatabaseRef;
     private java.util.List<ImageUpload> imgList;
     FirebaseAuth firebaseAuth;
@@ -25,13 +35,13 @@ public class List extends AppCompatActivity {
     public static final String FB_Database_Path = "image/";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+       View view= inflater.inflate(R.layout.fragment_mainfragment, container, false);
         imgList = new ArrayList<>();
-        lv = (ListView) findViewById(R.id.listViewImage);
+        lv = (ListView)view. findViewById(R.id.listViewImage);
         //Show progress dialog during list image loading
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please wait loading list image...");
         progressDialog.show();
         firebaseAuth=FirebaseAuth.getInstance();
@@ -51,12 +61,19 @@ public class List extends AppCompatActivity {
                     ImageUpload img = snapshot.getValue(ImageUpload.class);
                     imgList.add(img);
                 }
-
-
-                //Init adapter
-                adapter = new ImageListAdapter(List.this, R.layout.image_item, imgList);
-                //Set adapter for listview
-                lv.setAdapter(adapter);
+                int i=imgList.size();
+                if(i==0){
+                  Snackbar snackbar=  Snackbar.make(getView(),"No Images to display",Snackbar.LENGTH_LONG);
+                    snackbar.setAction("Add images", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getChildFragmentManager().beginTransaction().replace(R.id.frame1,new Upload()).commit();
+                        }
+                    });
+                    snackbar.show();
+                }else{
+                adapter = new ImageListAdapter(getActivity(), R.layout.image_item, imgList);
+                lv.setAdapter(adapter);}
             }
 
             @Override
@@ -65,7 +82,9 @@ public class List extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+        return view;
+    }
 
     }
-    }
+
 

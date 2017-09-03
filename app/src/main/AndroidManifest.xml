@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Signin" />
-        <activity android:name=".List"></activity>
     </application>
 
 </manifest>

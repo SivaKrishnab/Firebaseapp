@@ -68,7 +68,7 @@ public class Upload extends Fragment {
         imageView = (ImageView) view.findViewById(R.id.imageView);
         editText = (EditText) view.findViewById(R.id.txtImageName);
         firebaseAuth = FirebaseAuth.getInstance();
-        buttonlist = (Button) view.findViewById(R.id.button2);
+//        buttonlist = (Button) view.findViewById(R.id.button2);
         buttonimage = (Button) view.findViewById(R.id.button3);
         buttonupload = (Button) view.findViewById(R.id.button4);
         buttonupload.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +136,13 @@ public class Upload extends Fragment {
                 startActivityForResult(Intent.createChooser(intent, "Select image"), Request_Code);
             }
         });
-        buttonlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getContext(),List.class);
-                startActivity(intent);
-            }
-        });
+//        buttonlist.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(getContext(),List.class);
+//                startActivity(intent);
+//            }
+//        });
 
         return view;
     }

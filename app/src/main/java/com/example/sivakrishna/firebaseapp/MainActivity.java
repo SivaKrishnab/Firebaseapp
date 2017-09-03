@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment,new Mainfrragment1()).commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -45,19 +46,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             finish();
             startActivity(new Intent(MainActivity.this,Login.class));
@@ -73,8 +68,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,new Mainfragment()).commit();
         } else if (id == R.id.nav_gallery) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment,new Upload()).commit();
 
