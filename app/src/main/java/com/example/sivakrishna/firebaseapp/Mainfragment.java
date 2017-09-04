@@ -44,6 +44,7 @@ public class Mainfragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please wait loading list image...");
         progressDialog.show();
+        setRetainInstance(true);
         firebaseAuth=FirebaseAuth.getInstance();
         FirebaseUser user=firebaseAuth.getCurrentUser();
 
@@ -72,9 +73,10 @@ public class Mainfragment extends Fragment {
                     });
                     snackbar.show();
                 }else{
+                if(getActivity()!=null){
                 adapter = new ImageListAdapter(getActivity(), R.layout.image_item, imgList);
-                lv.setAdapter(adapter);}
-            }
+                lv.setAdapter(adapter);}}
+           }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

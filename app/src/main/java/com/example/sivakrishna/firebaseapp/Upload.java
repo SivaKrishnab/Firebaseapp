@@ -78,6 +78,7 @@ public class Upload extends Fragment {
                     final ProgressDialog dialog = new ProgressDialog(getContext());
                     dialog.setTitle("Uploading image");
                     dialog.show();
+                    setRetainInstance(true);
                     final FirebaseUser userid = firebaseAuth.getCurrentUser();
 
                     //Get the storage reference
