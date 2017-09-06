@@ -1,9 +1,7 @@
-package com.example.sivakrishna.firebaseapp;
+package com.example.sivakrishna.firebaseapp.Fragments;
 
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.sivakrishna.firebaseapp.Decorate;
+import com.example.sivakrishna.firebaseapp.Modelclasses.ImageUpload;
+import com.example.sivakrishna.firebaseapp.R;
+import com.example.sivakrishna.firebaseapp.Recycler;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,18 +30,17 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Mainfragment extends Fragment {
+public class ImageList extends Fragment {
     private DatabaseReference mDatabaseRef;
     private java.util.List<ImageUpload> imgList;
     FirebaseAuth firebaseAuth;
     private ListView lv;
-    private ImageListAdapter adapter;
     private Recycler recyclerviewAdapter;
     private ProgressDialog progressDialog;
     public static final String FB_Database_Path = "image/";
     RecyclerView recyclerView;
 
-    public Mainfragment() {
+    public ImageList() {
     }
 
     @Override

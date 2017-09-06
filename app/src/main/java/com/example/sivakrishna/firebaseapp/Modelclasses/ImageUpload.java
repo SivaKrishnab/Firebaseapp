@@ -1,4 +1,4 @@
-package com.example.sivakrishna.firebaseapp;
+package com.example.sivakrishna.firebaseapp.Modelclasses;
 
 /**
  * Created by siva krishna on 9/2/2017.
