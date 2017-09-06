@@ -3,11 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sivakrishna.firebaseapp.Mainfragment">
-
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewImage"/>
+        android:id="@+id/recyclerview"></android.support.v7.widget.RecyclerView>
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/listViewImage"/>-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

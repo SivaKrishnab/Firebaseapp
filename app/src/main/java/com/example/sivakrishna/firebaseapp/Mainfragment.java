@@ -1,11 +1,14 @@
 package com.example.sivakrishna.firebaseapp;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +34,24 @@ public class Mainfragment extends Fragment {
     FirebaseAuth firebaseAuth;
     private ListView lv;
     private ImageListAdapter adapter;
+    private Recycler recyclerviewAdapter;
     private ProgressDialog progressDialog;
     public static final String FB_Database_Path = "image/";
+    RecyclerView recyclerView;
+
+    public Mainfragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View view= inflater.inflate(R.layout.fragment_mainfragment, container, false);
         imgList = new ArrayList<>();
-        lv = (ListView)view. findViewById(R.id.listViewImage);
-        //Show progress dialog during list image loading
+//        lv = (ListView)view. findViewById(R.id.listViewImage);
+        recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        Decorate decorate=new Decorate(getContext());
+        recyclerView.addItemDecoration(decorate);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Please wait loading list image...");
         progressDialog.show();
@@ -65,17 +76,13 @@ public class Mainfragment extends Fragment {
                 int i=imgList.size();
                 if(i==0){
                   Snackbar snackbar=  Snackbar.make(getView(),"No Images to display",Snackbar.LENGTH_LONG);
-                    snackbar.setAction("Add images", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            getChildFragmentManager().beginTransaction().replace(R.id.frame1,new Upload()).commit();
-                        }
-                    });
+
                     snackbar.show();
                 }else{
                 if(getActivity()!=null){
-                adapter = new ImageListAdapter(getActivity(), R.layout.image_item, imgList);
-                lv.setAdapter(adapter);}}
+                    recyclerviewAdapter=new Recycler(getActivity(),imgList);
+                    recyclerView.setAdapter(recyclerviewAdapter);
+}}
            }
 
             @Override

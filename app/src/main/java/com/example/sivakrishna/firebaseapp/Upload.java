@@ -81,19 +81,15 @@ public class Upload extends Fragment {
                     setRetainInstance(true);
                     final FirebaseUser userid = firebaseAuth.getCurrentUser();
 
-                    //Get the storage reference
                     StorageReference ref = storageReference.child(userid.getUid()).child(FB_Storage_Path + System.currentTimeMillis() + "." + getImageExt(imguri));
 
-                    //Add file to reference
 
                     ref.putFile(imguri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
 
-                            //Dimiss dialog when success
                             dialog.dismiss();
-                            //Display success toast msg
                             Toast.makeText(getContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
                             ImageUpload imageUpload = new ImageUpload(editText.getText().toString(), taskSnapshot.getDownloadUrl().toString());
 
