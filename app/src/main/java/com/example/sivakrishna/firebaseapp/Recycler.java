@@ -26,9 +26,6 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by siva krishna on 9/5/2017.
- */
 
 public class Recycler extends RecyclerView.Adapter<Recycler.viewholder> {
     Context context;
@@ -71,12 +68,10 @@ this.context=context;
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()){
                             appleSnapshot.getRef().removeValue();
-
                         imglist.remove(position);
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position,imglist.size());
                             notifyDataSetChanged();
-
                             Toast.makeText(context,"removed",Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -89,7 +84,6 @@ this.context=context;
                 ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-//                        Recycler.this.notifyDataSetChanged();
                         Toast.makeText(context,"Done",Toast.LENGTH_SHORT).show();
                     }
                 });
